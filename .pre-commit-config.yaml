@@ -1,0 +1,52 @@
+files: \.*.tf$
+repos:
+- repo: https://github.com/antonbabenko/pre-commit-terraform
+  rev: v1.75.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+  hooks:
+    - id: terraform_fmt
+      name: Terraform fmt
+      description: Rewrites all Terraform configuration files to a canonical format.
+      entry: hooks/terraform_fmt.sh
+      language: script
+      files: (\.tf|\.tfvars)$
+      exclude: \.terraform\/.*$
+
+    - id: terraform_validate
+      name: Terraform validate
+      description: Validates all Terraform configuration files.
+      require_serial: true
+      entry: hooks/terraform_validate.sh
+      language: script
+      files: (\.tf|\.tfvars)$
+      exclude: \.terraform\/.*$
+
+    - id: terraform_tflint
+      name: Terraform validate with tflint
+      description: Validates all Terraform configuration files with TFLint.
+      require_serial: true
+      entry: hooks/terraform_tflint.sh
+      language: script
+      files: (\.tf|\.tfvars)$
+      exclude: \.terraform\/.*$
+
+    - id: terraform_checkov
+      name: Checkov
+      description: Runs checkov on Terraform templates.
+      entry: hooks/terraform_checkov.sh
+      language: script
+      always_run: false
+      files: \.tf$
+      exclude: \.terraform\/.*$
+      require_serial: true
+
+    - id: terraform_docs
+      args:
+        - --hook-config=--path-to-file=README.md
+        - --hook-config=--add-to-existing-file=true     # Boolean. true or false
+        - --hook-config=--create-file-if-not-exist=true # Boolean. true or false
+
+    - id: infracost_breakdown
+      args:
+        - --args=--path=./
+        - tls_insecure_skip_verify=true
+      verbose: true
