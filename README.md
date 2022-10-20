@@ -58,12 +58,12 @@ Fiz o upload de um arquivo para testarmos
 
 <img src="img/cyberduck-03.png" alt="cyberduck" width="600"/>
 
-Vamos acessar o Concole da AWS para conferir se o arquivo que fizemos o upload está dentro do bucket.
+Vamos acessar o Concole da AWS para conferir se o arquivo que realizei o upload está dentro do bucket.
 
 <img src="img/s3-bucket.png" alt="bucket" width="600"/>
 
-A imagem que realizamos o upload dentro do bucket =)
-Repare na path que o arquivo ficou, *Amazon S3/Buckets/1234567890-family-transfer/**gerson.carneiro**/aws-transfer-for-sftp.png*, no recurso `aws_transfer_user` em target adicionamos o parâmetro `$${Transfer:UserName}, onde ele cria um diretório home para cada usuário, mantendo o bucket mais organizado e seguro.
+✨ A imagem dentro do Bucket S3 =)
+Repare na path que o arquivo ficou da seguinte forma, *Amazon S3/Buckets/1234567890-family-transfer/**gerson.carneiro**/aws-transfer-for-sftp.png*, no recurso `aws_transfer_user` em target adicionamos o parâmetro `$${Transfer:UserName}`, que serve para criar um diretório home para cada usuário, mantendo o bucket mais organizado e seguro.
 
 ```terraform
 resource "aws_transfer_user" "this" {
@@ -77,22 +77,22 @@ resource "aws_transfer_user" "this" {
 }
 ```
 
-Todos as movimentaoes de arquivos, gera logs que são armazenados no CloudWatch Logs.
+Todos as movimentações de arquivos, gera logs que são armazenados no CloudWatch Logs.
 
 <img src="img/cloudwatch-logs.png" alt="cloudwatch-logs" width="600"/>
 
-Lembrando que além do Bucket S3 você pode utilizar o Amazon EFS.
+Lembrando que além do Bucket S3 você pode utilizar o serviço AWS Amazon EFS para armazenar arquivos.
 
-Para excluir o ambiente, execute o comando abaixo.
+Agora vamos excluir o ambiente, execute o comando abaixo.
 ```bash
 terraform destroy --auto-approve 
 ```
 
-Documentacao do Transfer Family: https://aws.amazon.com/pt/aws-transfer-family/
+Documentação AWS [Transfer Family](https://aws.amazon.com/pt/aws-transfer-family/)
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## 🛠 Requirements
+## Requirements
 
 | Name | Version |
 |------|---------|
@@ -115,8 +115,8 @@ No modules.
 |------|------|
 | [aws_iam_role.transfer_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role.transfer_server](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy.sftp_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.transfer_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role_policy.transfer_server](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_s3_bucket.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket_acl.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
 | [aws_s3_bucket_public_access_block.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
