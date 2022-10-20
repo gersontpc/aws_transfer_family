@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "s3_permission" {
   }
 }
 
-resource "aws_iam_role_policy" "sftp_policy" {
+resource "aws_iam_role_policy" "transfer_server" {
   name = format("%s-transfer-server-iam-policy", var.transfer_server_name)
   role = aws_iam_role.transfer_server.id
 
